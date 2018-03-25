@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flights - Worldskills Travel</title>
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+<body>
+    <div class="background-loading"></div>
+<div class="wrapper">
+    <header>
+        <nav class="navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="index.html" class="navbar-brand">Worldskills Travel</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.html">Flights</a></li>
+                        <li><a href="login.html">Log In</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <section class="flight-book">
+                <h3>Flight Booking</h3>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form id="form-booking" role="form">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h4 class="form-heading">1. Flight Destination</h4>
+                                    <div class="form-group">
+                                        <label class="control-label">Departure city name: </label>
+                                        <input name="departure_city_name" type="search" placeholder="Phu Yen" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Destination city name: </label>
+                                        <input name="destination_city_name" type="search" placeholder="Da Lat" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h4 class="form-heading">2. Date of Flight</h4>
+                                    <div class="form-group">
+                                        <label class="control-label">Departure: </label>
+                                        <input type="date" id="departure_date" class="form-control" placeholder="Choose Departure Date" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="radio">
+                                            <label><input type="radio" name="flight_type" checked value="0">One Way</label>
+                                            <label><input type="radio" name="flight_type" value="1">Return</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Return: </label>
+                                        <input type="date" id="return_date" class="form-control" placeholder="Choose Return Date">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h4 class="form-heading">3. Search Flights</h4>
+                                    <div class="form-group">
+                                        <label class="control-label">Total Children: </label>
+                                        <input type="number" name="total_children" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Total Audults: </label>
+                                        <input type="number" name="total_audults" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Flight Class: </label>
+                                        <select name="flight_class" class="form-control">
+                                            <option value="economy">Economy</option>
+                                            <option value="business">Business</option>
+                                            <option value="first">First</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn-book-flight btn btn-primary btn-block">Search Flights</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <section class="flight-list">
+                <h3>List of Airline</h3>
+                <div class="panel panel-default">
+                    <div class="panel-body list-airline">
+                        <div class="item-airline">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3><a href="">Phu Yen - Da Lat</a></h3>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <p class="h4"><strong>Airline name:</strong></p>
+                                            <p class="h5" id="airline_name">{{airline_name}}</p>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <p class="h4"><strong>Fare:</strong></p>
+                                            <p class="h5" id="price">{{price}} VND</p>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <p class="h4"><strong>Flight time:</strong></p>
+                                            <p class="h5" id="flight_time">{{flight_time}}</p>
+                                        </div>
+                                        <div class="col-sm-2 text-center">
+                                            <input type="hidden" value="{{id}}">
+                                            <button class="btn btn-primary btn-block"  data-toggle="modal" data-target=".model-confirm" onclick="app.select(this);">Select</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-new-list-item">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <ul class="pagination">
+                        <li data-hidden="0">&laquo;</li>
+                        <li>&lsaquo;</li>
+                        <li class="active">1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>&rsaquo;</li>
+                        <li>&raquo;</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="transaction">
+                
+            </section>
+            <div class="modal fade model-confirm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content confirm-modal">
+                  <div class="modal-header">
+                      <h4>Confirmation</h4>
+                  </div>
+                    <div class="modal-body">
+                        <div class="row">
+                                <div class="col-sm-4">
+                                    <p class="h4"><strong>Airline name:</strong></p>
+                                    <p class="h5" id="airline_name"></p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <p class="h4"><strong>Fare:</strong></p>
+                                    <p class="h5" id="price"></p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <p class="h4"><strong>Flight time:</strong></p>
+                                    <p class="h5" id="flight_time"></p>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary btn-confirm">Confirm</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p class="text-center">
+                Copyright &copy; 2017 | All Right Reserved
+            </p>
+        </div>
+    </footer>
+</div>
+<!--scripts-->
+<script type="text/javascript" src="assets/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/app.js"></script>
+</body>
+</html>
